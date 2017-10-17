@@ -10,17 +10,7 @@
 #define SCREEN_HEIGHT 480
 //#define SPRITE_SIZE 32
 
-enum {
-    DISPLAY_WIDTH  = 480
-    , DISPLAY_HEIGHT = 320
-    , UPDATE_INTERVAL = 1000/60
-    , HERO_SPEED = 2
-};
-class Sprite {
-public:
-    int x, y ;
-    Sprite() :x(0), y(0) {}
-} ;
+
 void onQuit();
     void onKeyDown( SDL_Event* event );
     void onKeyUp( SDL_Event* event );
