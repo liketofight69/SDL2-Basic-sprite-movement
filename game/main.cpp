@@ -120,8 +120,14 @@ int main(int argc, char ** argv)
     //
 
      if ( keys[SDLK_LEFT] ) {
+            SrcR.x = 45;
+          SrcR.y = 2;
+
         DestR.x -= speed ;
     } else if ( keys[SDLK_RIGHT] ) {
+         SrcR.x = 65;
+          SrcR.y = 2;
+
         DestR.x += speed ;
 
     } else if ( keys[SDLK_UP] ) {
