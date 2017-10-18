@@ -4,13 +4,25 @@
 #include <map>
 
 #define img "sprite.png"
+#define img2 "front.png"
+//#define front "front.png"
 #define SHAPE_SIZE 20
 
 #define SCREEN_WIDTH  640
 #define SCREEN_HEIGHT 480
 //#define SPRITE_SIZE 32
 
-
+enum {
+    DISPLAY_WIDTH  = 480
+    , DISPLAY_HEIGHT = 320
+    , UPDATE_INTERVAL = 1000/60
+    , HERO_SPEED = 2
+};
+class Sprite {
+public:
+    int x, y ;
+    Sprite() :x(0), y(0) {}
+} ;
 void onQuit();
     void onKeyDown( SDL_Event* event );
     void onKeyUp( SDL_Event* event );
@@ -45,10 +57,15 @@ int main(int argc, char ** argv)
         SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH,
         SCREEN_HEIGHT, 0);
     SDL_Renderer * renderer = SDL_CreateRenderer(window, -1, 0);
+    SDL_Renderer * ren = SDL_CreateRenderer(window, -1, 0);
     SDL_Surface * image = IMG_Load(img);
+    SDL_Surface * front_face = IMG_Load(img2);
     SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer,
         image);
-
+    SDL_Texture * front_text = SDL_CreateTextureFromSurface(renderer,
+        front_face);
+    SDL_Texture * f_text = SDL_CreateTextureFromSurface(ren,
+        front_face);
     /*SrcR.x = 0;
     SrcR.y = 0;
     DestR.x = 0;
@@ -76,12 +93,17 @@ int main(int argc, char ** argv)
     SDL_SetRenderDrawColor(renderer, 168, 230, 255, 255);
     SDL_RenderClear(renderer);
 
+
+
+
     while (!quit)
     {
         if (SDL_PollEvent(&event)) {
             switch (event.type) {
                 case SDL_QUIT:    onQuit();            break;
-                case SDL_KEYDOWN: onKeyDown( &event ); break ;
+                case SDL_KEYDOWN: onKeyDown( &event );
+
+                 break ;
                 case SDL_KEYUP:   onKeyUp( &event );   break ;
                 case SDL_MOUSEBUTTONDOWN:
                 case SDL_MOUSEBUTTONUP:
@@ -103,10 +125,52 @@ int main(int argc, char ** argv)
         DestR.x += speed ;
 
     } else if ( keys[SDLK_UP] ) {
+
+        //SDL_RenderClear(renderer);
+        //SDL_RenderCopy(renderer, texture,&SrcR, &DestR );
+        //SDL_RenderPresent(renderer);
+
+
+        SrcR.x = 0;
+          SrcR.y = 0;
        DestR.y -= speed ;
-    } else if ( keys[SDLK_DOWN] ) {
+    } else if ( keys[SDLK_DOWN] ) {//testing rendering when down pressed
+        //SDL_DestroyTexture(texture);
+
+          SrcR.x = 25;
+          SrcR.y = 2;
+
+          /*SDL_FreeSurface(image);
+
+        //SDL_FreeSurface(front_face);
+        SDL_DestroyTexture(texture);
+        SDL_RenderClear(renderer);
+
+        SDL_RenderCopy(renderer, front_text,&SrcR, &DestR );
+        SDL_RenderPresent(renderer);*/
+
         DestR.y += speed ;
+        //SDL_RenderCopy(renderer, front_text,&SrcR, &DestR );
+       /*SDL_DestroyRenderer(renderer);
+
+
+         SDL_RenderClear(ren);
+
+        SDL_RenderCopy(ren, f_text,&SrcR, &DestR );
+        SDL_RenderPresent(ren);
+        SDL_SetRenderDrawColor(ren, 168, 230, 255, 255);
+        SDL_RenderClear(ren);*/
+
+
+       /*if ( keys[SDLK_RIGHT] ) {
+        DestR.x += speed ;
+        }*/
+
+
+
     }
+
+
     //test
     /* collide with edges of screen */
     if ( DestR.x < 0 ) {
@@ -144,9 +208,13 @@ int main(int argc, char ** argv)
         SDL_RenderClear(renderer);
         SDL_RenderCopy(renderer, texture,&SrcR, &DestR );
         SDL_RenderPresent(renderer);
+
+
+
     }
 
     SDL_DestroyTexture(texture);
+
     SDL_FreeSurface(image);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
