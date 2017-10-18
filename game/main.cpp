@@ -12,17 +12,7 @@
 #define SCREEN_HEIGHT 480
 //#define SPRITE_SIZE 32
 
-enum {
-    DISPLAY_WIDTH  = 480
-    , DISPLAY_HEIGHT = 320
-    , UPDATE_INTERVAL = 1000/60
-    , HERO_SPEED = 2
-};
-class Sprite {
-public:
-    int x, y ;
-    Sprite() :x(0), y(0) {}
-} ;
+
 void onQuit();
     void onKeyDown( SDL_Event* event );
     void onKeyUp( SDL_Event* event );
@@ -132,9 +122,7 @@ int main(int argc, char ** argv)
 
     } else if ( keys[SDLK_UP] ) {
 
-        //SDL_RenderClear(renderer);
-        //SDL_RenderCopy(renderer, texture,&SrcR, &DestR );
-        //SDL_RenderPresent(renderer);
+        
 
 
         SrcR.x = 0;
@@ -146,34 +134,10 @@ int main(int argc, char ** argv)
           SrcR.x = 25;
           SrcR.y = 2;
 
-          /*SDL_FreeSurface(image);
-
-        //SDL_FreeSurface(front_face);
-        SDL_DestroyTexture(texture);
-        SDL_RenderClear(renderer);
-
-        SDL_RenderCopy(renderer, front_text,&SrcR, &DestR );
-        SDL_RenderPresent(renderer);*/
+          
 
         DestR.y += speed ;
-        //SDL_RenderCopy(renderer, front_text,&SrcR, &DestR );
-       /*SDL_DestroyRenderer(renderer);
-
-
-         SDL_RenderClear(ren);
-
-        SDL_RenderCopy(ren, f_text,&SrcR, &DestR );
-        SDL_RenderPresent(ren);
-        SDL_SetRenderDrawColor(ren, 168, 230, 255, 255);
-        SDL_RenderClear(ren);*/
-
-
-       /*if ( keys[SDLK_RIGHT] ) {
-        DestR.x += speed ;
-        }*/
-
-
-
+        
     }
 
 
